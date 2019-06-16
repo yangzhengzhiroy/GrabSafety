@@ -237,6 +237,6 @@ class TripRecord(object):
             df = df.groupby(by='bookingID').apply(lambda x: x[feature_ls].values).rename('activity').reset_index()
             # Padding.
             input_arr = pad_sequences(df['activity'].values, maxlen=self._pad_size, dtype='float', padding=self._padding)
-            return input_arr
+            return df['bookingID'].values, input_arr
         except (TypeError, AttributeError) as e:
             logger.exception(f'trip_clean error: {e}')

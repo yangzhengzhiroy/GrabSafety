@@ -31,8 +31,7 @@ class SimpleCNN(object):
 
     def _prepare_data(self, df):
         """ Prepare the data input with raw df. """
-        prepared_data = self._trip_record.trip_clean(df)
-        return prepared_data
+        return self._trip_record.trip_clean(df)
 
     def load(self, model_weights_path=_classifier_weights_path, model_graph_path=_classifier_graph_path):
         """ Load the existing model. """
@@ -46,11 +45,11 @@ class SimpleCNN(object):
         """ This function predicts danger probability based on input. """
         if not self._model:
             self.load()
-        data_arr = self._prepare_data(df)
+        ids, data_arr = self._prepare_data(df)
         y_pred_prob = self._model.predict(data_arr)
         y_pred_prob = y_pred_prob.flatten()
         if return_prob:
-            return y_pred_prob
+            return dict(zip(ids, y_pred_prob))
         else:
             y_pred_prob = np.where(y_pred_prob >= cutoff, 1, 0)
-            return y_pred_prob
+            return dict(zip(ids, y_pred_prob))
