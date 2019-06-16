@@ -14,7 +14,7 @@ from grabsafety import predict_danger
 
 >>> predict_danger(df)
 array([0.07552388, 0.07544506], dtype=float32)
-
+```
 
 ## Data Cleaning Approach
 The data cleaning has three major parts:
