@@ -31,7 +31,6 @@ garbage.py
 tf_*.py
 sk*.py
 preprocess*.py
-*.txt
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
